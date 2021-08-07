@@ -1,0 +1,103 @@
+extends layout
+
+block content
+  h2 #{title} 
+  form(action="/submit-form", method="post")
+
+    div(class="test")
+
+      p
+        label(for="result") result 
+          select(id="result", name="result")  
+            option(value="win") win 
+            option(value="defeat") defeat   
+      p 
+        label(for="killer") killer: 
+          select(id="killer", name="killer") 
+            each val in killer 
+              option(value=val["id"]) #{val["killer_name"]}
+      p 
+        label(for="rem_gen") remained gen: 
+          - var lst = [5, 4, 3, 2, 1, 0]
+          select(id="rem_gen", name="rem_gen") 
+            each i in lst 
+              option(value=i) #{i} 
+            option(value=-1) Opened
+
+      p 
+        label(for="map") map: 
+          select(id="map", name="map") 
+            each val in map 
+              option(value=val["id"]) #{val["map_name"]} 
+
+      p
+        input(type="submit")
+
+    div(class="tab")
+      button(class="tablinks", onclick="openCity(event, 'Killer')", type="button") Killer 
+      button(class="tablinks", onclick="openCity(event, 'Surviver1')", type="button") Surviver 1
+      button(class="tablinks", onclick="openCity(event, 'Surviver2')", type="button") Surviver 2
+      button(class="tablinks", onclick="openCity(event, 'Surviver3')", type="button") Surviver 3
+      button(class="tablinks", onclick="openCity(event, 'Surviver4')", type="button") Surviver 4
+
+    div(id="Killer", class="tabcontent")
+      p 
+        label(for="killer_perk") killer's perks:
+          table(id="killer_perk") 
+            //- var keys = Object.keys(killer_perk);
+            each val, key in killer_perk 
+              if val["id"] != -1
+                if key % 5 == 0
+                  tr 
+                td 
+                  input(type="checkbox", name="killer_perk_check", value=val["id"])
+                  label(for="killer_perk_check") #{val["perk"]} 
+
+    div(id="Surviver1", class="tabcontent")
+      p 
+        label(for="surviver_perk") surviver 1 perks:
+          table(id="surviver_perk") 
+            //- var keys = Object.keys(killer_perk);
+            each val, key in surviver_perk 
+              if key % 5 == 0
+                tr 
+              td 
+                input(type="checkbox", name="surviver_perk_check1", value=val["id"])
+                label(for="surviver_perk_check1") #{val["perk"]} 
+    div(id="Surviver2", class="tabcontent")
+      p 
+        label(for="surviver_perk") surviver 2 perks:
+          table(id="surviver_perk") 
+            //- var keys = Object.keys(killer_perk);
+            each val, key in surviver_perk 
+              if key % 5 == 0
+                tr 
+              td 
+                input(type="checkbox", name="surviver_perk_check2", value=val["id"])
+                label(for="surviver_perk_check2") #{val["perk"]} 
+    div(id="Surviver3", class="tabcontent")
+      p 
+        label(for="surviver_perk") surviver 3 perks:
+          table(id="surviver_perk") 
+            //- var keys = Object.keys(killer_perk);
+            each val, key in surviver_perk 
+              if key % 5 == 0
+                tr 
+              td 
+                input(type="checkbox", name="surviver_perk_check3", value=val["id"])
+                label(for="surviver_perk_check3") #{val["perk"]} 
+    div(id="Surviver4", class="tabcontent")
+      p 
+        label(for="surviver_perk") surviver 4 perks:
+          table(id="surviver_perk") 
+            //- var keys = Object.keys(killer_perk);
+            each val, key in surviver_perk 
+              if key % 5 == 0
+                tr 
+              td 
+                input(type="checkbox", name="surviver_perk_check4", value=val["id"])
+                label(for="surviver_perk_check4") #{val["perk"]} 
+
+
+  script(src="./javascripts/tab.js") 
+
